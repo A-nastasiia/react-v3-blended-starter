@@ -5,7 +5,7 @@ export default function App() {
   return (
     <>
       <Section>
-        <Container>{/* Компоненти застосунку */}</Container>
+        <Container><h1>gtf</h1></Container>
       </Section>
     </>
   );

@@ -1,5 +1,5 @@
 import Grid from "../Grid/Grid";
 
 export default function PhotosGallery() {
-  return <Grid>{/* PhotosGalleryItems */}</Grid>;
+  return <Grid><h2>rud</h2></Grid>;
 }
