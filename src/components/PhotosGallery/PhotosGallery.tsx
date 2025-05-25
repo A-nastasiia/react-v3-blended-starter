@@ -1,5 +1,26 @@
 import Grid from "../Grid/Grid";
+import GridItem from "../GridItem/GridItem";
+import PhotosGalleryItem from "../PhotosGalleryItem/PhotosGalleryItem";
+import { Photo } from "../../types/photo";
 
-export default function PhotosGallery() {
-  return <Grid><h2>rud</h2></Grid>;
+interface Props {
+  photos: Photo[];
+  onPhotoClick: (photo: Photo) => void;
+}
+
+export default function PhotosGallery({ photos, onPhotoClick }: Props) {
+  if (photos.length === 0) return null;
+
+  return (
+    <Grid>
+      {photos.map((photo) => (
+        <GridItem key={photo.id}>
+          <PhotosGalleryItem
+            photo={photo}
+            onClick={() => onPhotoClick(photo)}
+          />
+        </GridItem>
+      ))}
+    </Grid>
+  );
 }
