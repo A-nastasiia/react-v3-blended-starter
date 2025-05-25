@@ -1,25 +1,16 @@
 import Grid from "../Grid/Grid";
-import GridItem from "../GridItem/GridItem";
 import PhotosGalleryItem from "../PhotosGalleryItem/PhotosGalleryItem";
-import { Photo } from "../../types/photo";
+import type { Photo } from "../types/photo"; 
 
 interface Props {
   photos: Photo[];
-  onPhotoClick: (photo: Photo) => void;
 }
 
-export default function PhotosGallery({ photos, onPhotoClick }: Props) {
-  if (photos.length === 0) return null;
-
+export default function PhotosGallery({ photos }: Props) {
   return (
     <Grid>
       {photos.map((photo) => (
-        <GridItem key={photo.id}>
-          <PhotosGalleryItem
-            photo={photo}
-            onClick={() => onPhotoClick(photo)}
-          />
-        </GridItem>
+        <PhotosGalleryItem key={photo.id} photo={photo} />
       ))}
     </Grid>
   );

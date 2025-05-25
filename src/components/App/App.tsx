@@ -6,27 +6,32 @@ import PhotosGallery from "../PhotosGallery/PhotosGallery";
 import Loader from "../Loader/Loader";  
 import Text from "../Text/Text";
 import { fetchPhotos } from "../services/photos";  
+import type { Photo } from "../types/photo";
 
 export default function App() {
-  const [query, setQuery] = useState<string>(""); 
-  const [photos, setPhotos] = useState<any[]>([]); 
-  const [isLoading, setIsLoading] = useState<boolean>(false); 
-  const [isError, setIsError] = useState<boolean>(false); 
+  const [query, setQuery] = useState<string>("");
+  const [photos, setPhotos] = useState<Photo[]>([]);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [isError, setIsError] = useState<boolean>(false);
 
   const handleSearch = async (query: string) => {
-    if (!query.trim()) return; 
+    if (!query.trim()) return;
 
-    setQuery(query); 
-    setIsLoading(true); 
-    setIsError(false);  
+    setQuery(query);
+    setIsLoading(true);
+    setIsError(false);
 
     try {
-      const photosData = await fetchPhotos(query);  
-      setPhotos(photosData); 
-    } catch (error) {
-      setIsError(true);  
+      const photosData = await fetchPhotos(query);
+      setPhotos(photosData);
+    } catch (error) { if (error instanceof Error) {
+        console.error("Error fetching photos:", error.message); 
+      } else {
+        console.error("Unknown error occurred", error); 
+      }
+      setIsError(true);
     } finally {
-      setIsLoading(false); 
+      setIsLoading(false);
     }
   };
 
